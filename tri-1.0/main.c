@@ -81,13 +81,24 @@ int main(int argc, char *argv[]) {
         scanf(" %d", &tableau[i]);
 
     /* Algo */
-    struct timeval temps1, temps2;
+    struct timeval temps1, temps2, start_user_u, end_user_u, start_super_u, end_super_u;
+    struct rusage usage;
     gettimeofday(&temps1, NULL); // Obtenir temps initial
+    
+    getrusage(RUSAGE_SELF, &usage);
+    start_user_u = usage.ru_utime;
+    start_super_u = usage.ru_stime;
 
     algo_principal(parallelism, tableau, taille, arg);
     
     gettimeofday(&temps2, NULL); // Obtenir temps final
-    printf("Le temps de traitement parallèle est : %ld\n",temps2.tv_usec-temps1.tv_usec);
+
+    getrusage(RUSAGE_SELF, &usage);
+    end_user_u = usage.ru_utime;
+    end_super_u = usage.ru_stime;
+    printf("Le temps de timeofday         est : %ld.%lds\n",temps2.tv_sec-temps1.tv_sec,temps2.tv_usec-temps1.tv_usec);
+    printf("Le temps de rusage user       est : %ld.%lds\n",end_user_u.tv_sec-start_user_u.tv_sec,end_user_u.tv_usec-start_user_u.tv_usec);
+    printf("Le temps de rusage superuser  est : %ld.%lds\n",end_super_u.tv_sec-start_super_u.tv_sec,end_super_u.tv_usec-start_super_u.tv_usec);
 
 
     affiche("Tableau trie :\n");
