@@ -54,12 +54,12 @@ void algo_principal(int parallelism, int *tableau, int taille, char *arg)
          
         }
     gettimeofday(&temps2, NULL); // Obtenir temps après création
-    printf("Le temps de création des threads : %ld\n",temps2.tv_usec-temps1.tv_usec);
+    printf("Le temps de création des threads : %ld.%lds\n",temps2.tv_sec-temps1.tv_sec,temps2.tv_usec-temps1.tv_usec);
 
     for (i=0; i<parallelism; i++)
         pthread_join(tids[i], &status);
     gettimeofday(&temps2, NULL); // Obtenir temps après éxécution
-    printf("Le temps d’éxécution des threads : %ld\n",temps2.tv_usec-temps1.tv_usec);
+    printf("Le temps d’éxécution des threads : %ld.%lds\n",temps2.tv_sec-temps1.tv_sec,temps2.tv_usec-temps1.tv_usec);
     
     traitement_resultats(parallelism, arguments);
 
