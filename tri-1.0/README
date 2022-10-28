@@ -1,0 +1,17 @@
+Algorithmes sur des vecteurs
+
+Ce paquetage contient un ensemble de programmes mettant en oeuvre differents
+algorithmes sur des vecteurs en version sequentielle et multithreadee.
+
+1) creation d'un vecteur
+
+Le programme creer_vecteur permet de créer un vecteur au format d'entrée
+accepté par les autres programmes. Les composantes du vecteur créé sont
+générées aléatoirement.  La liste des options acceptées par ce programme est
+donnée par : ./creer_vecteur --help
+
+2) tri d'un vecteur
+
+Les programmes tri_sequentiel et tri_threads permettent, étant donné un vecteur
+lu sur l'entrée standard, de trier ce vecteur.  La liste des options acceptées
+par ce programme est donnée par : ./tri_* --help
