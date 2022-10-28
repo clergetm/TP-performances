@@ -4,3 +4,5 @@ tri-1.0/tri_sequentiel
 tri-1.0/tri_threads
 tri-1.0/vecteur
 tri-1.0/creer_vecteur
+*.vect
+*.res
