@@ -13,11 +13,14 @@ void *comportement_thread(void *arg) {
 
 void algo_principal(int parallelism, int *tableau, int taille, char *arg)
 {
+    struct timeval temps1, temps2;
     arguments_t *arguments;
     pthread_t *tids;
     int inf, sup;
     int erreur, i;
     void *status, *args_algo;
+
+    gettimeofday(&temps1, NULL); // Obtenir temps initial
 
     args_algo = initialisation(parallelism, tableau, taille, arg);
 
@@ -48,11 +51,16 @@ void algo_principal(int parallelism, int *tableau, int taille, char *arg)
         }
         inf = sup+1;
         sup = ((i+2)*(taille-1)) / parallelism;
-    }
+         
+        }
+    gettimeofday(&temps2, NULL); // Obtenir temps après création
+    printf("Le temps de création des threads : %ld\n",temps2.tv_usec-temps1.tv_usec);
 
     for (i=0; i<parallelism; i++)
-         pthread_join(tids[i], &status);
-
+        pthread_join(tids[i], &status);
+    gettimeofday(&temps2, NULL); // Obtenir temps après éxécution
+    printf("Le temps d’éxécution des threads : %ld\n",temps2.tv_usec-temps1.tv_usec);
+    
     traitement_resultats(parallelism, arguments);
 
     free(arguments);

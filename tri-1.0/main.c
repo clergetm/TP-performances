@@ -81,9 +81,15 @@ int main(int argc, char *argv[]) {
         scanf(" %d", &tableau[i]);
 
     /* Algo */
-    
+    struct timeval temps1, temps2;
+    gettimeofday(&temps1, NULL); // Obtenir temps initial
+
     algo_principal(parallelism, tableau, taille, arg);
     
+    gettimeofday(&temps2, NULL); // Obtenir temps final
+    printf("Le temps de traitement parallèle est : %ld\n",temps2.tv_usec-temps1.tv_usec);
+
+
     affiche("Tableau trie :\n");
     for (i=0; i<taille; i++)
         affiche("%d ", tableau[i]);
